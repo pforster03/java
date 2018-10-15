@@ -2,9 +2,22 @@ import java.util.*;
 import java.math.*;
 import java.io.*;
 import java.nio.*;
+import java.io.File;
+
 
 public class Hailstones{
   public static void main(String[] args) {
+    if(Arrays.stream(args).anyMatch("--help"::equals)){
+      System.out.println(String.join(
+        System.getProperty("line.separator"),
+        "Usage",
+        "Hailstones -|infile -|outfile",
+        "Computes the hailstones of a file. Pass it with arguments to read the number from a file and write it to the outfile. Use - to prompt for a number, and - to display the numbers to the terminal.",
+        "And the last!"
+      ));
+      return;
+    }
+
     Scanner scan = null;
     String string = null;
     if(args.length > 0 && !args[0].equals("-")){
@@ -29,20 +42,19 @@ public class Hailstones{
     }
 
     File fout = null;
-    FileOutputStream fos = null;
-    BufferedWriter bw = null;
+    FileWriter fos = null;
 
 
     if(args.length > 1 && !args[1].equals("-")){
       fout = new File(args[1]);
-      Files.createNewFile();
       try{
-        fos = new FileOutputStream(fout);
+        fos = new FileWriter(fout);
       } catch(IOException e) {
         System.out.println("Could not load file " + args[1]);
         System.exit(1);
       }
-      bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+      System.out.println("Writing output to file " + args[1]);
     }
 
     final BigInteger startingNum = new BigInteger(string);
@@ -55,8 +67,14 @@ public class Hailstones{
     while(!thisNum.equals(one)){
       if(thisNum.compareTo(biggest) == 1) biggest = thisNum;//store the biggest number
       if(args.length > 1 && !args[1].equals("-")){
-        bw.write(thisNum + "");
-        bw.newLine();
+        try{
+          System.out.println("Writing" + thisNum);
+          fos.write(thisNum + System.getProperty("line.separator"));
+          fos.flush();
+        }catch(IOException e){
+          e.printStackTrace();
+          System.exit(2);
+        }
       }else{
         System.out.println(thisNum);
       }
