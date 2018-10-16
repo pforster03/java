@@ -21,7 +21,7 @@ public class Hailstones{
     Scanner scan = null;
     String string = null;
     if(args.length > 0 && !args[0].equals("-")){
-      System.out.println("Loading number from file " + args[0]);
+      System.err.println("Loading number from file " + args[0]);
       File file = new File(args[0]);
       try {
         FileInputStream fis = new FileInputStream(file);
@@ -30,14 +30,14 @@ public class Hailstones{
         fis.close();
 
         string = new String(data, "UTF-8").trim();
-        System.out.println("Loaded number from file " + args[0]);
+        System.err.println("Loaded number from file " + args[0]);
       } catch(IOException e) {
-        System.out.println("Could not load file " + args[0]);
+        System.err.println("Could not load file " + args[0]);
         System.exit(1);
       }
     }else{
       scan = new Scanner(System.in);
-      System.out.print("Enter a positive hailstone starting value > ");
+      System.err.print("Enter a positive hailstone starting value > ");
       string = scan.nextLine();
     }
 
@@ -50,11 +50,11 @@ public class Hailstones{
       try{
         fos = new FileWriter(fout);
       } catch(IOException e) {
-        System.out.println("Could not load file " + args[1]);
+        System.err.println("Could not load file " + args[1]);
         System.exit(1);
       }
 
-      System.out.println("Writing output to file " + args[1]);
+      System.err.println("Writing output to file " + args[1]);
     }
 
     final BigInteger startingNum = new BigInteger(string);
@@ -68,7 +68,6 @@ public class Hailstones{
       if(thisNum.compareTo(biggest) == 1) biggest = thisNum;//store the biggest number
       if(args.length > 1 && !args[1].equals("-")){
         try{
-          System.out.println("Writing" + thisNum);
           fos.write(thisNum + System.getProperty("line.separator"));
           fos.flush();
         }catch(IOException e){
@@ -86,9 +85,9 @@ public class Hailstones{
       }
     }
 
-    System.out.println("start: " + startingNum);
-    System.out.println("term count");
-    System.out.println("biggest: " + biggest);
+    System.err.println("start: " + startingNum);
+    System.err.println("term count");
+    System.err.println("biggest: " + biggest);
     // avoid memory leak
     if(args.length <= 0){
       scan.close();
