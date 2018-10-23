@@ -14,5 +14,6 @@ public class CakeProgram{
     System.out.println();
     final Cake cake = new Cake(isChocolate, isMaple);
     System.out.println(cake.getRecpie());
+    scan.close();
   }
 }
