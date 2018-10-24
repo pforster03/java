@@ -9,6 +9,8 @@ import java.net.URL;
 public class Cake{
   public boolean isChocolateFlavor;
   public boolean isMapleFrosting;
+
+  // statics don't change
   private static String chocolateRecipie;
   private static String vanillaRecipie;
   private static String chocolateFrostingRecipie;
@@ -18,6 +20,8 @@ public class Cake{
   public Cake(Boolean isChocolateFlavor, Boolean isMapleFrosting){
     this.isChocolateFlavor = isChocolateFlavor;
     this.isMapleFrosting = isMapleFrosting;
+
+    //recpies
     chocolateRecipie = "2 cups all-purpose flour\n" +
       "2 cups sugar\n" +
       "3/4 cup unsweetened cocoa powder\n" +
@@ -70,6 +74,7 @@ public class Cake{
   }
 
   public String getRecpie(){
+    //return the correct recipie using terniaries
     return "Cake:\n" + (isChocolateFlavor ? chocolateRecipie : vanillaRecipie) + "\n\nFrosting:\n" + (isMapleFrosting ? chocolateFrostingRecipie : mapleFrostingRecipie);
   }
 }
