@@ -21,7 +21,7 @@ public class Cake{
     this.isChocolateFlavor = isChocolateFlavor;
     this.isMapleFrosting = isMapleFrosting;
 
-    //recpies
+    // recpies
     chocolateRecipie = "2 cups all-purpose flour\n" +
       "2 cups sugar\n" +
       "3/4 cup unsweetened cocoa powder\n" +
@@ -60,7 +60,7 @@ public class Cake{
       "Optional: 1/2 teaspoon maple flavoring";
   }
 
-  //toggles canada on this Cake
+  // toggles canada on this Cake
   public void canada(Boolean isReallyCanada){
     this.isMapleFrosting = true;
   }
@@ -74,7 +74,7 @@ public class Cake{
   }
 
   public String getRecpie(){
-    //return the correct recipie using terniaries
+    // return the correct recipie using terniaries
     return "Cake:\n" + (isChocolateFlavor ? chocolateRecipie : vanillaRecipie) + "\n\nFrosting:\n" + (isMapleFrosting ? chocolateFrostingRecipie : mapleFrostingRecipie);
   }
 }
