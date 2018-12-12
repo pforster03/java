@@ -1,6 +1,7 @@
 import javax.swing.JOptionPane;
 import javax.swing.*;
 import java.math.MathContext;
+import java.math.RoundingMode;
 import java.math.BigDecimal;
 import java.awt.*;
 
@@ -42,13 +43,14 @@ public class RandomPi{
     frame.setExtendedState(frame.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    MathContext context = MathContext.UNLIMITED;
+    String str = JOptionPane.showInputDialog("Enter output precision");
+    Integer precision = Integer.parseInt(str);
+
+    MathContext context = new MathContext(precision, RoundingMode.HALF_UP);
 
     inside = new BigDecimal(0, context);
-    String str = JOptionPane.showInputDialog("Enter number of trials");
+    str = JOptionPane.showInputDialog("Enter number of trials");
     BigDecimal trials = new BigDecimal(str, context);
-    str = JOptionPane.showInputDialog("Enter output precision");
-    Integer precision = Integer.parseInt(str);
 
     String plain = trials.toPlainString();
     String trials2 = plain.substring(0, Math.min(plain.length(), MAX));
