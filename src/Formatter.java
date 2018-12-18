@@ -8,13 +8,14 @@ public class Formatter{
     //print prompt
     System.out.print("Enter nummber of words to display per line > ");
     //grab a line
-    int num = s.nextInt();
+    int numPerLine = s.nextInt();
     String str = "";
 
     int count = 0;
 
     while(true){
       String line = s.nextLine();
+      System.out.print(">");
       if(line.length() == 0){
         if(count == 1){
           break;
@@ -24,12 +25,32 @@ public class Formatter{
       }else{
         count = 1;
       }
-      str += line;
+      str += line + "\n";
     }
 
-    str = str.replaceAll("\n", "").replaceAll("\t", "");
+    String[] arr = str.replaceAll("\r", "").replaceAll("\n", " ").replaceAll("\t", "").split(" ");
 
-    System.out.println(str);
+    ArrayList<String> output = new ArrayList<String>();
+
+    int idx = 0;
+    int wordsStored = 0;
+
+    for(String word : arr){
+      if(wordsStored == numPerLine){
+        wordsStored = 0;
+        idx ++;
+      }else{
+        if(output.size() <= idx){
+          output.add("");
+        }
+        output.set(idx, output.get(idx) + " " + word);
+        // System.out.println("the value is " + output.get(idx) + " now");
+        wordsStored ++;
+      }
+    }
+
+    System.out.println("Output:");
+    System.out.println("\b" + String.join("\n", output));
 
     s.close();
   }
